@@ -1,0 +1,29 @@
+﻿@page
+@model Razor.Sample.Pages.OTPModel
+@{
+    ViewData["Title"] = "OTP";
+}
+
+<h2>OTP</h2>
+
+<div class="border container" style="padding:30px;">
+    <form method="post">
+        <div class="form-group row">
+            <div class="col-3">
+                <label for="otp">Enter Code:</label>
+            </div>
+            <div class="col-6">
+                <input type="text" name="otp" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <input type="submit" value="verify" class="btn btn-primary form-control" />
+            </div>
+        </div>
+        @if (ViewData["results"] != null)
+        {
+            <h3>Verified! <a href='https://dev-489843.okta.com/login/sessionCookieRedirect?redirectUrl=https://dev-489843.okta.com/app/salesforce/exk12hqybjchsRyAl4x7/sso/saml&token=@ViewData["results"]'>Click here to continue.</a></h3>
+        }
+    </form>
+</div>
