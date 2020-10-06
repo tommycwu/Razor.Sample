@@ -88,9 +88,7 @@ namespace Razor.Sample.Pages
 
             using (var httpClient = new HttpClient(httpClientHandler))
             {
-                httpClient.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("SSWS", apiKey);
 
                 HttpResponseMessage authnResponse = httpClient.PostAsync(usersUri, stringContent).Result;

@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Okta.Sdk;
+using Okta.Auth.Sdk;
+using Okta.Sdk.Configuration;
 
 namespace Razor.Sample.Pages
 {
@@ -20,7 +22,7 @@ namespace Razor.Sample.Pages
 
         private static string oktaDomain = "https://dev-489843.okta.com";
 
-        private string[] GetStateAndFactor(string u, string p)
+        private string[] GetState(string u, string p)
         {
             var authnUri = $"{oktaDomain}/api/v1/authn";
             var username = u;
@@ -33,7 +35,7 @@ namespace Razor.Sample.Pages
                 options = new
                 {
                     multiOptionalFactorEnroll = true,
-                    warnBeforePasswordExpired = false,
+                    warnBeforePasswordExpired = true,
                 },
             };
 
@@ -41,44 +43,57 @@ namespace Razor.Sample.Pages
 
             var stringContent = new StringContent(body, Encoding.UTF8, "application/json");
 
-            string stateToken = "";
-            string factorId = "";
 
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             httpClientHandler.AllowAutoRedirect = false;
 
             using (var httpClient = new HttpClient(httpClientHandler))
             {
-                httpClient.DefaultRequestHeaders
-                    .Accept
-                    .Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage authnResponse = httpClient.PostAsync(authnUri, stringContent).Result;
 
                 if (authnResponse.IsSuccessStatusCode)
                 {
                     var authnResponseContent = authnResponse.Content.ReadAsStringAsync().Result;
+                    string stToken = "";
+                    string factId = "";
+                    string usrId = "";
+                    string sessToken = "";
+                    var retArray = new string[3];
 
                     dynamic authnObject = JsonConvert.DeserializeObject(authnResponseContent);
-                    stateToken = authnObject.stateToken;
-
-                    for (int i = 0; i < authnObject._embedded.factors.Count; i++)
+                    stToken = authnObject.stateToken;
+                    usrId = authnObject._embedded.user.id;
+                    sessToken = authnObject.sessionToken;
+                    if (stToken != null)
                     {
-                        dynamic factorsObj = authnObject._embedded.factors[i];
-                        string factorTyp = factorsObj.factorType;
-                        if (factorTyp == "sms")
+
+                        for (int i = 0; i < authnObject._embedded.factors.Count; i++)
                         {
-                            factorId = factorsObj.id;
-                            break;
+                            dynamic factorsObj = authnObject._embedded.factors[i];
+                            string factorTyp = factorsObj.factorType;
+                            if (factorTyp == "sms")
+                            {
+                                factId = factorsObj.id;
+                                break;
+                            }
                         }
+                        {
+                            retArray[0] = stToken;
+                            retArray[1] = usrId;
+                            retArray[2] = factId;
+                        };
+                        return retArray;
                     }
-
-                    var retArray = new string[]
+                    else
                     {
-                        stateToken,
-                        factorId,
-                    };
-
+                        {
+                            retArray[0] = sessToken;
+                            retArray[1] = usrId;
+                            retArray[2] = "";
+                        };
+                    }
                     return retArray;
                 }
             }
@@ -140,13 +155,28 @@ namespace Razor.Sample.Pages
 
         public void OnPost()
         {
+            //get username and password on form submit
             var sUsrname = Request.Form["usrname"];
             var sPwd = Request.Form["pwd"];
-            string[] arrayGet = GetStateAndFactor(sUsrname, sPwd);
-            var retStateToken = arrayGet[0];
-            var retFactorId = arrayGet[1];
-            string[] arrayInvoke = InvokeFactor(retStateToken, retFactorId);
-            Response.Redirect("OTP?s=" + arrayInvoke[0] +  "&f=" + arrayInvoke[1] + "&u=" + sUsrname);
+
+            //get validate username and passowrd
+            string[] arrayGet = GetState(sUsrname, sPwd);
+            var retSToken = arrayGet[0];
+            var retUserId = arrayGet[1];
+            //if mfa is required
+            if (arrayGet[2].Length > 0)
+            {
+                var retFactorId = arrayGet[2];
+                //goto the factors verify endpoint and invoke a sms call
+                string[] arrayInvoke = InvokeFactor(retSToken, retFactorId);
+                //redirect to the next page for the otp input
+                Response.Redirect("OTP?t=2&s=" + arrayInvoke[0] + "&f=" + arrayInvoke[1] + "&u=" + sUsrname + "&i=" + retUserId);
+            }
+            else
+            {
+                //else redirect with session token
+                Response.Redirect("OTP?t=1&n=" + retSToken + "&u=" + sUsrname + "&i=" + retUserId);
+            }
         }
     }
 }

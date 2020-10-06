@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\tommy.wu\\source\\repos\\razor.sample\\Razor.Sample.csproj": {}
+    "C:\\Users\\tommy.wu\\source\\repos\\Razor.Sample\\Razor.Sample.csproj": {}
   },
   "projects": {
-    "C:\\Users\\tommy.wu\\source\\repos\\razor.sample\\Razor.Sample.csproj": {
+    "C:\\Users\\tommy.wu\\source\\repos\\Razor.Sample\\Razor.Sample.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\tommy.wu\\source\\repos\\razor.sample\\Razor.Sample.csproj",
+        "projectUniqueName": "C:\\Users\\tommy.wu\\source\\repos\\Razor.Sample\\Razor.Sample.csproj",
         "projectName": "Razor.Sample",
-        "projectPath": "C:\\Users\\tommy.wu\\source\\repos\\razor.sample\\Razor.Sample.csproj",
+        "projectPath": "C:\\Users\\tommy.wu\\source\\repos\\Razor.Sample\\Razor.Sample.csproj",
         "packagesPath": "C:\\Users\\tommy.wu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\tommy.wu\\source\\repos\\razor.sample\\obj\\",
+        "outputPath": "C:\\Users\\tommy.wu\\source\\repos\\Razor.Sample\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tommy.wu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -57,6 +57,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Okta.Auth.Sdk": {
+              "target": "Package",
+              "version": "[2.0.1, )"
             },
             "Okta.Sdk": {
               "target": "Package",

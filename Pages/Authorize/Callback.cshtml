@@ -4,5 +4,25 @@
     ViewData["Title"] = "Callback";
 }
 
-<h1>Callback</h1>
+<h3>Google Id Token</h3>
 
+<div class="border container" style="padding:40px; width:880px">
+    <form method="post">
+        <input id='Hash' name='Hash' type='hidden' />
+        <div class="form-group row">
+            <div class="col-2 offset-2">
+                <input type="submit" value="View Token" class="btn btn-primary form-control" />
+            </div>
+        </div>
+        <br />
+        @if (ViewData["id_Token"] != null)
+        {
+            <font size="2">id_Token</font>
+            <p><font size="1"><textarea rows="4" style="width:800px; word-wrap:break-word;">@ViewData["id_Token"]</textarea></font></p>
+            <p><font size="1"><textarea rows="10" style="width:800px; word-wrap:break-word;">@ViewData["idTokenJson"]</textarea></font></p>
+        }
+        <script type='text/javascript'>
+            document.getElementById('Hash').value = window.location.hash;
+        </script>
+</form>
+</div>
