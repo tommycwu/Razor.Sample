@@ -44,28 +44,5 @@ else
             <p><font size="1"><textarea rows="4" style="width:800px; word-wrap:break-word;">@ViewData["access_Token"]</textarea></font></p>
             <p><font size="1"><textarea rows="10" style="width:800px; word-wrap:break-word;"> @ViewData["accessTokenJson"]</textarea></font></p>
         }
-        @*<h5>Authenticated! <a href='https://dev-489843.okta.com/app/salesforce/exk12hqybjchsRyAl4x7/sso/saml?'>Click here to continue with direct app link.</a></h5>*@
-        @*<h5>Authenticated! <a href='https://dev-489843.okta.com/login/sessionCookieRedirect?redirectUrl=https://dev-489843.okta.com/app/salesforce/exk12hqybjchsRyAl4x7/sso/saml'>Click here to continue with cookie.</a></h5>*@
-        @if (ViewData["session_Token"] != null)
-        {
-    <p>
-        <a href='https://dev-489843.okta.com/app/salesforce/exk12hqybjchsRyAl4x7/sso/saml?sessionToken=@ViewData["session_Token"]'>Click here to continue with direct app link.</a>
-    </p>
-    <p>
-        <a href='https://dev-489843.okta.com/login/sessionCookieRedirect?redirectUrl=https://dev-489843.okta.com/app/salesforce/exk12hqybjchsRyAl4x7/sso/saml&token=@ViewData["session_Token"]'>Click here to continue with token.</a>
-    </p>    
-    <p>
-        <a href='https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=@ViewData["session_Token"]'>Click here to continue with client token.</a>
-    </p>        
-    <p>
-        <a href="https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa13hi4za9UJGcLQ4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorize%2Fcallback&state=state&nonce=nonce&idp=0oa13omwe4PcV1qEh4x7&response_mode=fragment">Login With Google</a>
-    </p>
-
-                }
-                @if (ViewData["app_Links"] != null)
-                {
-                    @*<h5>Authenticated! <a href='@ViewData["app_Links"]'>Click here to continue with dynamic app link.</a></h5>*@
-                }
-
         </form>
 </div>

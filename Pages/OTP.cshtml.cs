@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -13,6 +14,7 @@ using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Okta.Sdk;
@@ -26,11 +28,11 @@ namespace Razor.Sample.Pages
         private static string oktaDomain = "https://dev-489843.okta.com";
         private static string oktaAuthorizationServer = "aus12xq52tYhEMf0Z4x7";
         private static string clientId = "0oa12ggderGOV0YAy4x7";
-        private static string redirectUrlEncoded = System.Net.WebUtility.UrlEncode(@"https://localhost:44336/authorization-code/callback");
+        //private static string redirectUrlEncoded = System.Net.WebUtility.UrlEncode(@"https://localhost:44336/authorization-code/callback");
+        private static string redirectUrlEncoded = System.Net.WebUtility.UrlEncode(@"http://ec2-34-212-181-98.us-west-2.compute.amazonaws.com/authorization-code/callback");
 
         private static string scope = System.Net.WebUtility.UrlEncode("openid profile email");
         private static string responseType = System.Net.WebUtility.UrlEncode("id_token token");
-        private static string apiKey = "00Sfdsuhpku46epPueiWVnXZ5ONBhrB1cDEGW0sKME";
         private string sessionToken = "";
         private string userId = "";
 
@@ -82,7 +84,8 @@ namespace Razor.Sample.Pages
 
         private string BuildCookieUrl(string session_Token)
         {
-            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
+//            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
+            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=http%3A%2F%2Fec2-34-212-181-98.us-west-2.compute.amazonaws.com%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
         }
 
         public void OnGet()
