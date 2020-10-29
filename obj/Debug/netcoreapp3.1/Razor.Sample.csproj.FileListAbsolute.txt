@@ -155,3 +155,13 @@ C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publ
 C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\appsettings.json
 C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\Razor.Sample.deps.json
 C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\Razor.Sample.runtimeconfig.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\web.config
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\web.config
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\appsettings.Development.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\appsettings.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.Development.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\appsettings.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\Razor.Sample.deps.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\publish\Razor.Sample.runtimeconfig.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\Razor.Sample.deps.json
+C:\Users\tommy.wu\source\repos\Razor.Sample\bin\Debug\netcoreapp3.1\publish\publish\publish\publish\Razor.Sample.runtimeconfig.json

@@ -91,7 +91,7 @@ namespace Razor.Sample.Pages
                         {
                             retArray[0] = sessToken;
                             retArray[1] = usrId;
-                            retArray[2] = "";
+                            retArray[2] = null;
                         };
                     }
                     return retArray;
@@ -161,21 +161,28 @@ namespace Razor.Sample.Pages
 
             //get validate username and passowrd
             string[] arrayGet = GetState(sUsrname, sPwd);
-            var retSToken = arrayGet[0];
-            var retUserId = arrayGet[1];
-            //if mfa is required
-            if (arrayGet[2].Length > 0)
+            if (arrayGet != null)
             {
-                var retFactorId = arrayGet[2];
-                //goto the factors verify endpoint and invoke a sms call
-                string[] arrayInvoke = InvokeFactor(retSToken, retFactorId);
-                //redirect to the next page for the otp input
-                Response.Redirect("OTP?t=2&s=" + arrayInvoke[0] + "&f=" + arrayInvoke[1] + "&u=" + sUsrname + "&i=" + retUserId);
+                var retSToken = arrayGet[0];
+                var retUserId = arrayGet[1];
+                //if mfa is required
+                if (arrayGet[2] != null)
+                {
+                    var retFactorId = arrayGet[2];
+                    //goto the factors verify endpoint and invoke a sms call
+                    string[] arrayInvoke = InvokeFactor(retSToken, retFactorId);
+                    //redirect to the next page for the otp input
+                    Response.Redirect("OTP?t=2&s=" + arrayInvoke[0] + "&f=" + arrayInvoke[1] + "&u=" + sUsrname + "&i=" + retUserId);
+                }
+                else
+                {
+                    //else redirect with session token
+                    Response.Redirect("OTP?t=1&n=" + retSToken + "&u=" + sUsrname + "&i=" + retUserId);
+                }
             }
             else
             {
-                //else redirect with session token
-                Response.Redirect("OTP?t=1&n=" + retSToken + "&u=" + sUsrname + "&i=" + retUserId);
+                //display error message
             }
         }
     }

@@ -84,8 +84,8 @@ namespace Razor.Sample.Pages
 
         private string BuildCookieUrl(string session_Token)
         {
-//            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
-            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=http%3A%2F%2Fec2-34-212-181-98.us-west-2.compute.amazonaws.com%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
+            return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=https%3A%2F%2Flocalhost%3A44336%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
+            //return "https://dev-489843.okta.com/oauth2/v1/authorize?client_id=0oa12ggderGOV0YAy4x7&response_type=id_token&scope=openid%20email&redirect_uri=http%3A%2F%2Fec2-34-212-181-98.us-west-2.compute.amazonaws.com%2Fauthorization-code%2Fcallback&state=state&nonce=nonce&sessionToken=" + session_Token;
         }
 
         public void OnGet()
